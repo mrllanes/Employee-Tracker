@@ -3,11 +3,17 @@
 const connection = require("./config/connection");
 const inquirer = require("inquirer");
 
-connection.connect((err) => {
-	if (err) throw err;
-	console.log(`connected as id ${connection.threadId}`);
-	mainMenu();
-});
+// connection.query("SELECT * FROM table1", (err, data) => {
+// 	if (err) throw err;
+// 	console.log(data);
+// 	console.log("TESTING");
+// });
+
+// connection.connect((err) => {
+// 	if (err) throw err;
+// 	console.log(`connected as id ${connection.threadId}`);
+// 	// mainMenu();
+// });
 
 const mainMenu = () => {
 	inquirer
