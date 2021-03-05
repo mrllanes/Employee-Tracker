@@ -4,11 +4,11 @@ require("dotenv").config();
 
 // Connection using .env file for privacy
 const connection = mysql.createConnection({
-	database: process.env.database,
-	host: process.env.host,
-	port: process.env.port,
-	user: process.env.user,
-	password: process.env.password,
+	database: `${process.env.DATABASE}`,
+	host: `${process.env.HOST}`,
+	port: `${process.env.PORT}`,
+	user: `${process.env.USER}`,
+	password: `${process.env.PASSWORD}`,
 });
 
 module.exports = connection;

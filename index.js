@@ -1,5 +1,5 @@
 // Dependencies
-const database = require("./db/schema");
+// const database = require("./db/schema");
 const connection = require("./config/connection");
 const inquirer = require("inquirer");
 
