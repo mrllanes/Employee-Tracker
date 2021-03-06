@@ -10,20 +10,12 @@ CREATE TABLE departments (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE manager (
-	id INT NOT NULL AUTO_INCREMENT,
-  first_name VARCHAR(50) NOT NULL,
-  last_name VARCHAR(50) NOT NULL,
-  foreign key (id) REFERENCES departments(id),
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE role (
+CREATE TABLE roles (
 	id INT NOT NULL AUTO_INCREMENT,
   title VARCHAR(50) NOT NULL,
   salary DECIMAL(10, 2) NOT NULL,
   dept_id INT NOT NULL,
-  foreign key (dept_id) REFERENCES departments(id),
+  foreign key (dept_id) REFERENCES departments(id) ON DELETE CASCADE,
   PRIMARY KEY (id)
 );
 
@@ -33,7 +25,7 @@ CREATE TABLE employees (
   last_name VARCHAR(50) NOT NULL,
   role_id INT NOT NULL,
   manager_id INT,
-  foreign key (role_id) REFERENCES role(id),
-  foreign key (manager_id) REFERENCES manager(id),
+  foreign key (role_id) REFERENCES roles(id) ON DELETE CASCADE,
+  foreign key (manager_id) REFERENCES employees(id),
 	PRIMARY KEY (id)
 );

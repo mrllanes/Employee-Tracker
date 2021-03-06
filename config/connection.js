@@ -1,5 +1,6 @@
 // Dependencies
 const mysql = require("mysql2");
+const util = require("util");
 require("dotenv").config();
 
 // Connection using .env file for privacy
@@ -10,5 +11,9 @@ const connection = mysql.createConnection({
 	user: process.env.DB_USER,
 	password: process.env.DB_PASSWORD,
 });
+
+connection.connect();
+//
+connection.query = util.promisify(connection.query);
 
 module.exports = connection;
