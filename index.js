@@ -149,11 +149,7 @@ const addEmployee = async () => {
 
 const addDepartment = async () => {
 	try {
-		const departments = await connection.query("SELECT * FROM departments");
-		// const deptChoices = departments.map(({ id, name }) => ({
-		// 	name: name,
-		// 	value: id,
-		// }));
+		// const departments = await connection.query("SELECT * FROM departments");
 		const newDept = await inquirer.prompt([
 			{
 				name: "name",
@@ -170,6 +166,38 @@ const addDepartment = async () => {
 	}
 };
 
-const addRole = () => {};
+const addRole = async () => {
+	try {
+		const departments = await connection.query("SELECT * FROM departments");
+		const deptChoices = departments.map(({ id, name }) => ({
+			name: name,
+			value: id,
+		}));
+		const newRole = await inquirer.prompt([
+			{
+				name: "title",
+				type: "input",
+				message: "Please type in the Title for the New Role:",
+			},
+			{
+				name: "dept_id",
+				type: "list",
+				message: "In which Department will this role exist:",
+				choices: deptChoices,
+			},
+			{
+				name: "salary",
+				type: "input",
+				message: "Pleae enter the salary for this new Role:",
+			},
+		]);
+		await connection.query("INSERT INTO roles SET ?", newRole);
+		const viewRoles = await connection.query("SELECT * FROM roles");
+		console.table(viewRoles);
+		mainMenu();
+	} catch (err) {
+		console.log(err);
+	}
+};
 
 const updateRoles = () => {};
