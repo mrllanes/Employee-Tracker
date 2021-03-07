@@ -5,6 +5,8 @@
 ## Deployed site
 
 https://mrllanes.github.io/Employee-Tracker/
+https://github.com/mrllanes/Employee-Tracker
+https://youtu.be/zr40MVsi5x0
 
 ## Table of Contents
 
