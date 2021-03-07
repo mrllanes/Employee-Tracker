@@ -1,8 +1,7 @@
 // Dependencies
-// const database = require("./db/schema");
 const connection = require("./config/connection");
 const inquirer = require("inquirer");
-require("console.table");
+const { printTable } = require("console-table-printer");
 
 // Main function when the program is launched. Asks the initial question
 const mainMenu = () => {
@@ -70,8 +69,10 @@ mainMenu();
 // Below are all the functions that go with the mainMenu selections
 const viewEmployees = async () => {
 	try {
-		const employees = await connection.query("SELECT * FROM employees");
-		console.table(employees);
+		const employees = await connection.query(
+			"SELECT employees.id, employees.first_name, employees.last_name, roles.title, employees.manager_id FROM employees LEFT JOIN roles ON employees.role_id = roles.id"
+		);
+		printTable(employees);
 		mainMenu();
 	} catch (err) {
 		console.log(err);
@@ -81,7 +82,7 @@ const viewEmployees = async () => {
 const viewDepartments = async () => {
 	try {
 		const departments = await connection.query("SELECT * FROM departments");
-		console.table(departments);
+		printTable(departments);
 		mainMenu();
 	} catch (err) {
 		console.log(err);
@@ -90,8 +91,10 @@ const viewDepartments = async () => {
 
 const viewRoles = async () => {
 	try {
-		const roles = await connection.query("SELECT * FROM roles");
-		console.table(roles);
+		const roles = await connection.query(
+			"SELECT roles.id, roles.title, roles.salary, departments.name AS Department FROM roles LEFT JOIN departments ON roles.dept_id = departments.id"
+		);
+		printTable(roles);
 		mainMenu();
 	} catch (err) {
 		console.log(err);
@@ -139,9 +142,7 @@ const addEmployee = async () => {
 			},
 		]);
 		await connection.query("INSERT INTO employees SET ?", newEmployee);
-		const viewEmps = await connection.query("SELECT * FROM employees");
-		console.table(viewEmps);
-		mainMenu();
+		viewEmployees();
 	} catch (err) {
 		console.log(err);
 	}
@@ -158,9 +159,7 @@ const addDepartment = async () => {
 			},
 		]);
 		await connection.query("INSERT INTO departments SET ?", newDept);
-		const viewDepts = await connection.query("SELECT * FROM departments");
-		console.table(viewDepts);
-		mainMenu();
+		viewDepartments();
 	} catch (err) {
 		console.log(err);
 	}
@@ -192,9 +191,7 @@ const addRole = async () => {
 			},
 		]);
 		await connection.query("INSERT INTO roles SET ?", newRole);
-		const viewRoles = await connection.query("SELECT * FROM roles");
-		console.table(viewRoles);
-		mainMenu();
+		viewRoles();
 	} catch (err) {
 		console.log(err);
 	}
@@ -228,6 +225,11 @@ const updateRoles = async () => {
 				choices: roleChoices,
 			},
 		]);
+		await connection.query(
+			"UPDATE employees SET role_id = ? WHERE id = ?",
+			[changeRole.role_id, changeRole.id]
+		);
+		viewEmployees();
 	} catch (err) {
 		console.log(err);
 	}
