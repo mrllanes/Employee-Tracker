@@ -4,12 +4,7 @@ const connection = require("./config/connection");
 const inquirer = require("inquirer");
 require("console.table");
 
-// connection.query("SELECT * FROM table1", (err, data) => {
-// 	if (err) throw err;
-// 	console.log(data);
-// 	console.log("TESTING");
-// });
-
+// Main function when the program is launched. Asks the initial question
 const mainMenu = () => {
 	inquirer
 		.prompt({
@@ -19,15 +14,16 @@ const mainMenu = () => {
 			choices: [
 				"View all Employees",
 				"View all Departments",
-				"View all roles",
+				"View all Roles",
 				"Add an Employee",
 				"Add a Department",
-				"Add a role",
+				"Add a Role",
 				"Update Employee Roles",
 				"Exit Program",
 			],
 		})
 		.then((answer) => {
+			// Each answer from above will be directed to the proper function below
 			switch (answer.firstAction) {
 				case "View all Employees":
 					viewEmployees();
@@ -37,7 +33,7 @@ const mainMenu = () => {
 					viewDepartments();
 					break;
 
-				case "View all roles":
+				case "View all Roles":
 					viewRoles();
 					break;
 
@@ -49,7 +45,7 @@ const mainMenu = () => {
 					addDepartment();
 					break;
 
-				case "Add a role":
+				case "Add a Role":
 					addRole();
 					break;
 
@@ -68,8 +64,10 @@ const mainMenu = () => {
 		});
 };
 
+// Initial calling of the Main Function
 mainMenu();
 
+// Below are all the functions that go with the mainMenu selections
 const viewEmployees = async () => {
 	try {
 		const employees = await connection.query("SELECT * FROM employees");
@@ -80,9 +78,25 @@ const viewEmployees = async () => {
 	}
 };
 
-const viewDepartments = () => {};
+const viewDepartments = async () => {
+	try {
+		const departments = await connection.query("SELECT * FROM departments");
+		console.table(departments);
+		mainMenu();
+	} catch (err) {
+		console.log(err);
+	}
+};
 
-const viewRoles = () => {};
+const viewRoles = async () => {
+	try {
+		const roles = await connection.query("SELECT * FROM roles");
+		console.table(roles);
+		mainMenu();
+	} catch (err) {
+		console.log(err);
+	}
+};
 
 const addEmployee = async () => {
 	try {
@@ -99,7 +113,7 @@ const addEmployee = async () => {
 			value: id,
 		}));
 		selectManager.push({ name: "none", value: null });
-		console.log(managers);
+		// console.log(managers);
 		const newEmployee = await inquirer.prompt([
 			{
 				name: "first_name",
@@ -133,7 +147,28 @@ const addEmployee = async () => {
 	}
 };
 
-const addDepartment = () => {};
+const addDepartment = async () => {
+	try {
+		const departments = await connection.query("SELECT * FROM departments");
+		// const deptChoices = departments.map(({ id, name }) => ({
+		// 	name: name,
+		// 	value: id,
+		// }));
+		const newDept = await inquirer.prompt([
+			{
+				name: "name",
+				type: "input",
+				message: "Please type in the Name of the New Department:",
+			},
+		]);
+		await connection.query("INSERT INTO departments SET ?", newDept);
+		const viewDepts = await connection.query("SELECT * FROM departments");
+		console.table(viewDepts);
+		mainMenu();
+	} catch (err) {
+		console.log(err);
+	}
+};
 
 const addRole = () => {};
 

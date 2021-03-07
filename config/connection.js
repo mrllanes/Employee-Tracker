@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
 });
 
 connection.connect();
-//
+// Using util to use promises, allows us to use async/await
 connection.query = util.promisify(connection.query);
 
 module.exports = connection;

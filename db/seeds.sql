@@ -4,11 +4,11 @@ INSERT INTO departments (name)
 VALUES ("Information Technology"), ("Finance"), ("Customer Service"), ("Sales");
 
 INSERT INTO roles (title, salary, dept_id)
-VALUES ("Manager", 70000.00, 1), ("Manager", 80000.00, 2), ("Manager", 60000.00, 3), ("Manager", 65000.00, 4);
+VALUES ("IT Manager", 70000.00, 1), ("Finance Manager", 80000.00, 2), ("CS Manager", 60000.00, 3), ("Sales Manager", 65000.00, 4);
 INSERT INTO roles (title, salary, dept_id)
-VALUES ("Specialist", 61000.00, 1), ("Specialist", 65000.00, 2), ("Specialist", 48000.00, 3), ("Specialist", 45000.00, 4);
+VALUES ("IT Specialist", 61000.00, 1), ("Finance Specialist", 65000.00, 2), ("CS Specialist", 48000.00, 3), ("Sales Specialist", 45000.00, 4);
 INSERT INTO roles (title, salary, dept_id)
-VALUES ("Associate", 50000.42, 1), ("Associate", 55000.99, 2), ("Associate", 40000.07, 3), ("Associate", 39000.01, 4);
+VALUES ("IT Associate", 50000.42, 1), ("Finance Associate", 55000.99, 2), ("CS Associate", 40000.07, 3), ("Sales Associate", 39000.01, 4);
 
 INSERT INTO employees (first_name, last_name, role_id)
 VALUES ("Morgan", "Freeman", 1), ("Bill", "Pullman", 2), ("Samuel", "Jackson", 3), ("Julia", "Roberts", 4);
