@@ -188,7 +188,7 @@ const addRole = async () => {
 			{
 				name: "salary",
 				type: "input",
-				message: "Pleae enter the salary for this new Role:",
+				message: "Enter the salary for this new Role:",
 			},
 		]);
 		await connection.query("INSERT INTO roles SET ?", newRole);
@@ -200,4 +200,35 @@ const addRole = async () => {
 	}
 };
 
-const updateRoles = () => {};
+const updateRoles = async () => {
+	try {
+		const employees = await connection.query("SELECT * FROM employees");
+		const selectEmployee = employees.map(
+			({ id, first_name, last_name }) => ({
+				name: `${first_name} ${last_name}`,
+				value: id,
+			})
+		);
+		const roles = await connection.query("SELECT * FROM roles");
+		const roleChoices = roles.map(({ id, title }) => ({
+			name: title,
+			value: id,
+		}));
+		const changeRole = await inquirer.prompt([
+			{
+				name: "id",
+				type: "list",
+				message: "Please select the Employee who's Role will change:",
+				choices: selectEmployee,
+			},
+			{
+				name: "role_id",
+				type: "list",
+				message: "Select the new role this employee will have:",
+				choices: roleChoices,
+			},
+		]);
+	} catch (err) {
+		console.log(err);
+	}
+};
