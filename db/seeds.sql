@@ -11,17 +11,17 @@ INSERT INTO roles (title, salary, dept_id)
 VALUES ("IT Associate", 50000.42, 1), ("Finance Associate", 55000.99, 2), ("CS Associate", 40000.07, 3), ("Sales Associate", 39000.01, 4);
 
 INSERT INTO employees (first_name, last_name, role_id)
-VALUES ("Morgan", "Freeman", 1), ("Bill", "Pullman", 2), ("Samuel", "Jackson", 3), ("Julia", "Roberts", 4);
+VALUES ("Morgan", "Freeman", 1), ("Tom", "Hanks", 2), ("Samuel", "Jackson", 3), ("Julia", "Roberts", 4);
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
-VALUES ("Jack", "Frost", 5, 1), ("James", "Hardin", 5, 1), ("Florence", "Johnson", 9, 1), ("Bobby", "Jones", 9, 1);
+VALUES ("Hakeem", "Olajuwon", 5, 1), ("James", "Hardin", 5, 1), ("Mia", "Hamm", 9, 1), ("Warren", "Moon", 9, 1);
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
-VALUES ("Jennifer", "Aniston", 6, 2), ("Salma", "Hayak", 6, 2), ("Amanda", "Peet", 10, 2), ("Micky", "Rooney", 10, 2);
+VALUES ("Jennifer", "Aniston", 6, 2), ("Salma", "Hayak", 6, 2), ("Amanda", "Peet", 10, 2), ("Mara", "Rooney", 10, 2);
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
-VALUES ("Rodney", "Dangerfield", 7, 3), ("Bill", "Burr", 7, 3), ("Maria", "Bamford", 11, 3), ("Jeff", "Ross", 11, 3);
+VALUES ("Nikki", "Glaser", 7, 3), ("Bill", "Burr", 7, 3), ("Maria", "Bamford", 11, 3), ("Jeff", "Ross", 11, 3);
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
-VALUES ("Molly", "Weasley", 8, 4), ("Hermione", "Granger", 8, 4), ("Kingsley", "Shacklebolt", 12, 4), ("Stan", "Shunpike", 12, 4);
+VALUES ("Fleur", "Delacour", 8, 4), ("Nymphadora", "Tonks", 8, 4), ("Kingsley", "Shacklebolt", 12, 4), ("Stan", "Shunpike", 12, 4);
 
